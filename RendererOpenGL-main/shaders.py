@@ -85,3 +85,14 @@ void main()
     fragColor = vec4(1,1,0, 1.0);
 }
 """
+green = """
+#version 450
+layout (location = 0) out vec4 fragColor;
+in vec3 outColor;
+in vec2 outTexCoords;
+uniform sampler2D tex;
+void main()
+{
+    fragColor = vec4(0,2,0, 2.0);
+}
+"""

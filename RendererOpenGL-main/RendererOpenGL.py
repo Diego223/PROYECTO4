@@ -19,14 +19,24 @@ clock = pygame.time.Clock()
 rend = Renderer(screen)
 rend.setShaders(shaders.vertex_shader, shaders.blanco)
 
-face = Model('mesa.obj', 'gun.bmp')
-face.position.z = -5
+#MODELOS
+mesa = Model('mesa.obj', 'gun.bmp')
+mesa.position.z = -5
+gun = Model('pichu.obj', 'gun.bmp')
+gun.position.z = -8
+cafe = Model('cafe.obj', 'model.bmp')
+cafe.position.z = -2
+Wolf = Model('Wolf.obj', 'gun.bmp')
+Wolf.position.z = -3
 
-rend.scene.append( face )
+
+rend.scene.append( mesa )
+
 rolas=['zelad.mp3']
 pygame.mixer.music.load(rolas[0])
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
+
 
 
 #bg= pygame.image.load("space.jpg").convert()
@@ -58,17 +68,52 @@ while isRunning:
         rend.camPosition.x -= 1 * deltaTime
     if mouse[2]:
         rend.camPosition.z += 1 * deltaTime
-    elif rend.camPosition.z >= 4.5:
+        print(rend.camPosition.z)
+    elif rend.camPosition.z >= 2:
         rend.camPosition.z = 1
     if mouse[0]:
         rend.camPosition.z -= 1 * deltaTime
-    elif rend.camPosition.z <= -4.5:
+        print(rend.camPosition.z)
+    elif rend.camPosition.z <= -2.0:
         rend.camPosition.z = 1
+       
     if keys[K_w]:
         rend.camPosition.y -= 1 * deltaTime
     if keys[K_s]:
         rend.camPosition.y += 1 * deltaTime
-            
+    
+
+    # Cambio de Modelos
+    if keys[K_y]:
+        rend.scene.clear()
+        rend.scene.append( mesa )
+    if keys[K_u]:
+        rend.scene.clear()
+        rend.scene.append( gun )
+    if keys[K_i]:
+        rend.scene.clear()
+        rend.scene.append( cafe )
+    if keys[K_o]:
+        rend.scene.clear()
+        rend.scene.append( Wolf )
+    #Cambio de Shaders
+    if keys[K_h]:
+        rend.setShaders(shaders.vertex_shader, shaders.blanco)
+    if keys[K_j]:
+        rend.setShaders(shaders.vertex_shader, shaders.amarillo)
+    if keys[K_k]:
+        rend.setShaders(shaders.vertex_shader, shaders.Gris)
+    if keys[K_l]:
+        rend.setShaders(shaders.vertex_shader, shaders.green)
+
+ 
+
+
+
+
+
+
+
 
     if keys[K_LEFT]:
         if rend.valor > 0:
